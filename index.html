@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechP1xel - Home</title>
+  <link rel="icon" type="image/png" href="logo.png" sizes="32x32">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header with Title and Navigation -->
+  <header>
+    <div class="searchNLogo">
+      <div class="logo-search">
+        <img src="logo.jpg" alt="logo nav">
+          <h1>TechP1xel</h1>
+      </div>
+      <!-- Search Input -->
+      <input class="searcher search-bar" type="text" placeholder="Search...">
+
+      <!-- Search Results -->
+      <div id="search-results">
+          <a href="index.html" class="content-section" data-title="Home" data-content="Welcome to the TechP1xel home page where we discuss the latest in tech news.">
+              <h3>Home</h3>
+              <p>Welcome to the TechP1xel home page where we discuss the latest in tech news.</p>
+          </a>
+          <a href="TechNews.html" class="content-section" data-title="Tech News" data-content="The latest news in technology including gadgets, software updates, and innovations.">
+              <h3>Tech News</h3>
+              <p>The latest news in technology including gadgets, software updates, and innovations.</p>
+          </a>
+          <a href="GameReview.html" class="content-section" data-title="Game Reviews" data-content="Reviews and ratings for the latest video games including Elden Ring, Black Myth: Wukong, and more.">
+              <h3>Game Reviews</h3>
+              <p>Reviews and ratings for the latest video games including Elden Ring, Black Myth: Wukong, and more.</p>
+          </a>
+          <a href="AboutUs.html" class="content-section" data-title="About Us" data-content="Information about TechP1xel, the team behind the content, and our mission.">
+              <h3>About Us</h3>
+              <p>Information about TechP1xel, the team behind the content, and our mission.</p>
+          </a>
+          <a href="Article1.html" class="content-section" data-title="Far Cry" data-content="An article about the a big deal sale days in Amazon. Far Cry and Assassin's Creed board games in Prime Big Deal Days.">
+            <h3>Far Cry 3 and Assassin's Creed board games are heavily discounted on Prime Big Deal Days.</h3>
+            <p>An article about the a big deal sale days in Amazon. Far Cry and Assassin's Creed board games in Prime Big Deal Days.</p>
+        </a>
+      </div>
+
+    
+    </div>
+      <!--MOBILE BURGER NAVIGATOR-->
+      <div class="top-bar">
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h1 class="techp1xel-title"><a href="index.html">TechP1xel</a></h1>
+      </div>
+
+      <!-- Centered Logo -->
+      <div class="logo-container">
+        <img src="logo.jpg" alt="TechP1xel Logo" class="centered-logo">
+      </div>
+
+      <nav>
+      <ul>
+        <li><a href="#"><img src="4.png" alt="Home Icon" class="nav-icon"> Home</a></li>
+        <li><a href="TechNews.html"><img src="3.png" alt="Tech News Icon" class="nav-icon"> Tech News</a></li>
+        <li><a href="GameReview.html"><img src="2.png" alt="Game Reviews Icon" class="nav-icon"> Game Reviews</a></li>
+        <li><a href="AboutUs.html"><img src="1.png" alt="About Us Icon" class="nav-icon"> About Us</a></li>
+      </ul>
+    </nav>
+     <!-- Mobile Navigation (hidden by default) -->
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="TechNews.html">Tech News</a></li>
+        <li><a href="GameReview.html">Game Reviews</a></li>
+        <li><a href="AboutUs.html">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.search-bar');
+    const searchResults = document.getElementById('search-results');
+    const sections = document.querySelectorAll('.content-section');
+    
+    //Store the original content of search results for restoration
+    const originalContent = searchResults.innerHTML;
+    
+    //Initially hide the search results
+    searchResults.style.display = 'none';
+    
+    function searchSite() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        //If search query is empty, hide results and restore original content
+        if (!query) {
+            searchResults.style.display = 'none';
+            searchResults.innerHTML = originalContent;
+            return;
+        }
+        
+        let hasMatch = false;
+        
+        searchResults.innerHTML = originalContent;
+        
+        const currentSections = searchResults.querySelectorAll('.content-section');
+        
+        currentSections.forEach(section => {
+            const title = section.getAttribute('data-title').toLowerCase();
+            const content = section.getAttribute('data-content').toLowerCase();
+            
+            if (title.includes(query) || content.includes(query)) {
+                section.style.display = 'block';
+                hasMatch = true;
+            } else {
+                section.style.display = 'none';
+            }
+        });
+        
+        //Show results container
+        searchResults.style.display = 'block';
+        
+        if (!hasMatch) {
+            searchResults.innerHTML = '<p class="no-results">No results found.</p>';
+        }
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', searchSite);
+        
+        //Close search results when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!searchResults.contains(event.target) && event.target !== searchInput) {
+                searchResults.style.display = 'none';
+                //Restore original content when hiding results
+                searchResults.innerHTML = originalContent;
+            }
+        });
+        
+        //Show results when clicking on search input
+        searchInput.addEventListener('click', function(event) {
+            if (this.value.trim()) {
+                searchResults.style.display = 'block';
+                searchSite();
+            }
+        });
+        
+        //Reset search results when clearing input
+        searchInput.addEventListener('search', function() {
+            if (!this.value) {
+                searchResults.style.display = 'none';
+                searchResults.innerHTML = originalContent;
+            }
+        });
+    }
+});
+
+    //BURGERMENU
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM fully loaded and parsed');
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const mobileNav = document.querySelector('.mobile-nav ul');
+
+      if (hamburgerMenu && mobileNav) {
+          hamburgerMenu.addEventListener('click', function() {
+              console.log('Hamburger clicked!');
+              mobileNav.classList.toggle('show');
+          });
+      } else {
+          console.error('Hamburger menu or mobile navigation not found');
+      }
+    });
+  </script>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Video Section -->
+    <section class="video-section1">
+      <h2 style="display: none;">None</h2>
+      <div class="video-container">
+        <video style="border-radius: 10px;" autoplay="autoplay" muted>
+          <source src="mainvid.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+    </section>
+
+    <!-- Top News Section -->
+    <section class="news-section">
+      <h2>Top News</h2>
+      <div class="news-grid">
+        <div class="news-box" style="background-image: url('warc.jpg');">
+          <div class="overlay box11">
+            <p><a href="#">World of Warcraft Classic Reveals Schedule for Season of Discovery Realm Consolidation</a></p>
+          </div>
+        </div>
+        <div class="news-box" style="background-image: url('news1.png');">
+          <div class="overlay box12">
+            <p><a href="Article1.html">Far Cry 3 and Assassin's Creed board games are heavily discounted on Prime Big Deal Days.</a></p>
+          </div>
+        </div>
+        <div class="news-box" style="background-image: url('halo.jpg');">
+          <div class="overlay box13">
+            <p><a href="#">Multiple new Halo games are in the works, as the series moves to Unreal and 343 gets a new name.</a></p>
+          </div>
+        </div>
+        <div class="news-box" style="background-image: url('jedisurvivor.jpeg');">
+          <div class="overlay box14">
+            <p><a href="#">Ubisoft Is Reportedly Considering A Major Change To Its Structure, Based On Talks</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="trending-section">
+      <h2>Trending</h2>
+      <div class="carousel-container">
+        <button class="carousel-btn left-btn" id="left-btn">&#10094;</button>
+        <div class="carousel-track-container">
+          <div class="carousel-track">
+            <!-- First Set of 4 Boxes -->
+            <div class="news-box" style="background-image: url('silenthill.jpg');">
+              <div class="overlay">
+                <p><a href="#">The original Silent Hill 2 director was "not satisfied"</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('pirategame.jpg');">
+              <div class="overlay">
+                <p><a href="">New Pirate RPG "Sea of Legends" Unveiled, Directed by the Creators of Shadowrun and Crimson Skies</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('aliensilotation.jpg');">
+              <div class="overlay">
+                <p><a href="#">Alien: Isolation 2 Confirmed</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('nintendo.jpg');">
+              <div class="overlay box20">
+                <p><a href="#">Without an attorney, a Nintendo Switch modder who refused to shut down is now taking Nintendo to court.</a></p>
+              </div>
+            </div>
+            <!-- Second Set of 4 Boxes -->
+            <div class="news-box" style="background-image: url('fallout.png');">
+              <div class="overlay">
+                <p><a href="#">Fallout: Nuevo México Aims to Replicate Fallout London's Fallout 4 for New Vegas</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('echowisdom.avif');">
+              <div class="overlay box21">
+                <p><a href="#">Players of Echoes of Wisdom Are Coming Up with Ingenious New Strategies to Win Horse Races</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('bestgames.avif');">
+              <div class="overlay">
+                <p><a href="#">Some of the Biggest Video Game Releases of 2024 Happen This Week</a></p>
+              </div>
+            </div>
+            <div class="news-box" style="background-image: url('obiwan.jpg');">
+              <div class="overlay">
+                <p><a href="#">Disney Is 'Exploring' Ideas for Obi-Wan Kenobi Season 2? According to Star Wars' Ewan McGregor</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn right-btn" id="right-btn">&#10095;</button>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-left">
+      <img src="logo.jpg" alt="Logo" class="footer-logo">
+      <div class="contain-to-logo">
+        <ul class="footer-links">
+          <li><a href="AboutUs.html">Contact Us | About Us</a></li>
+
+        </ul>
+        <p class="follow-us">Follow Us:</p>
+        <div class="social-icons">
+          <a href="https://github.com/wrathfury092" target="_blank"><img src="github.png" alt="Twitter"></a>
+          <a href="https://www.twitch.tv/wrathfuryy" target="_blank"><img src="twitchlog.png" alt="Twitch" style="opacity:55%;"></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-right">
+      <p>Copyright © 2024-2025 DAVID</p>
+    </div>
+  </footer>  
+</body>
+</html>
